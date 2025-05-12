@@ -147,7 +147,7 @@ public class MainDashboard extends JFrame {
                         JOptionPane.YES_NO_OPTION);
 
                 if (choice == JOptionPane.YES_OPTION) {
-                    LoginFrame loginFrame = new LoginFrame();
+                    Login loginFrame = new Login();
                     loginFrame.setVisible(true);
                     dispose();
                 }

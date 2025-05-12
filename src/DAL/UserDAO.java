@@ -40,31 +40,44 @@ public class UserDAO {
 
         return null;
     }
-
-    public boolean addUser(User user) {
-        String query = "INSERT INTO users (username, password, full_name, role, active) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getPassword());
-            stmt.setString(3, user.getFullName());
-            stmt.setString(4, user.getRole());
-            stmt.setBoolean(5, user.isActive());
-
-            int affectedRows = stmt.executeUpdate();
-            if (affectedRows > 0) {
-                try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        user.setId(generatedKeys.getInt(1));
-                    }
-                }
-                return true;
+    public boolean isUsernameExists(String username) {
+        String query = "SELECT id FROM users WHERE username = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, username);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next(); // Nếu có kết quả trả về thì username đã tồn tại
             }
-            return false;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
+
+
+    public boolean addUser(User user) {
+            String query = "INSERT INTO users (username, password, full_name, role, active) VALUES (?, ?, ?, ?, ?)";
+            try (PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                stmt.setString(1, user.getUsername());
+                stmt.setString(2, user.getPassword());
+                stmt.setString(3, user.getFullName());
+                stmt.setString(4, user.getRole());
+                stmt.setBoolean(5, user.isActive());
+
+                int affectedRows = stmt.executeUpdate();
+                if (affectedRows > 0) {
+                    try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            user.setId(generatedKeys.getInt(1));
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();

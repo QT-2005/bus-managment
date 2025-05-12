@@ -30,6 +30,10 @@ public class UserManager {
 
         return userDAO.addUser(user);
     }
+    public boolean isUsernameExists(String username) {
+        return userDAO.isUsernameExists(username);
+    }
+
 
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
