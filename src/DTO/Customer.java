@@ -1,5 +1,11 @@
 package DTO;
 
+import Config.DatabaseConnection;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Customer {
     private int id;
     private String name;
@@ -16,7 +22,6 @@ public class Customer {
         this.email = email;
         this.address = address;
     }
-
     // Getters and Setters
     public int getId() {
         return id;

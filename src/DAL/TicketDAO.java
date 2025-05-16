@@ -22,8 +22,8 @@ public class TicketDAO {
             stmt.setInt(2, ticket.getCustomerId());
             stmt.setString(3, ticket.getSeatNumber());
             stmt.setDouble(4, ticket.getPrice());
-            stmt.setDate(5, new java.sql.Date(ticket.getBookingDate().getTime()));
-            stmt.setDate(6, new java.sql.Date(ticket.getTravelDate().getTime()));
+            stmt.setDate(5, new Date(ticket.getBookingDate().getTime()));
+            stmt.setDate(6, new Date(ticket.getTravelDate().getTime()));
             stmt.setString(7, ticket.getStatus());
 
             int affectedRows = stmt.executeUpdate();
@@ -106,8 +106,8 @@ public class TicketDAO {
             stmt.setInt(2, ticket.getCustomerId());
             stmt.setString(3, ticket.getSeatNumber());
             stmt.setDouble(4, ticket.getPrice());
-            stmt.setDate(5, new java.sql.Date(ticket.getBookingDate().getTime()));
-            stmt.setDate(6, new java.sql.Date(ticket.getTravelDate().getTime()));
+            stmt.setDate(5, new Date(ticket.getBookingDate().getTime()));
+            stmt.setDate(6, new Date(ticket.getTravelDate().getTime()));
             stmt.setString(7, ticket.getStatus());
             stmt.setInt(8, ticket.getId());
 

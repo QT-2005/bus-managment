@@ -50,7 +50,7 @@ public class UserManagementFrame extends JFrame {
 
         cmbRole = new JComboBox<>();
         cmbRole.addItem("ADMIN");
-        cmbRole.addItem("STAFF");
+        cmbRole.addItem("USER");
 
         chkActive = new JCheckBox("Active");
         chkActive.setSelected(true);
@@ -61,7 +61,7 @@ public class UserManagementFrame extends JFrame {
         btnClear = new JButton("Clear");
 
         // Setup table
-        String[] columns = {"ID", "Username", "Full Name", "Role", "Active"};
+        String[] columns = { "ID", "Username", "Full Name", "Role", "Active" };
         userTableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -289,7 +289,8 @@ public class UserManagementFrame extends JFrame {
         selectedUser.setActive(chkActive.isSelected());
 
         if (userManager.updateUser(selectedUser)) {
-            JOptionPane.showMessageDialog(this, "User updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "User updated successfully!", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
             clearForm();
             loadUsers();
         } else {
@@ -310,7 +311,8 @@ public class UserManagementFrame extends JFrame {
 
         if (choice == JOptionPane.YES_OPTION) {
             if (userManager.deleteUser(selectedUser.getId())) {
-                JOptionPane.showMessageDialog(this, "User deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "User deleted successfully!", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
                 clearForm();
                 loadUsers();
             } else {

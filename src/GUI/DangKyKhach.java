@@ -13,18 +13,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 
-
 public class DangKyKhach extends JFrame {
 
     public DangKyKhach() {
         setTitle("Đăng Ký Khách Hàng");
-        setSize(430, 705);
+        setSize(435, 720); // Tăng chiều cao để chứa thêm trường địa chỉ
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
 
-        JLabel bg = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/ImageBackground/backgroundDky.png"))));
-        bg.setBounds(0, 0, 422, 690);
+        JLabel bg = new JLabel(
+                new ImageIcon(Objects.requireNonNull(getClass().getResource("/ImageBackground/backgroundDky.png"))));
+        bg.setBounds(0, 0, 422, 690); // Điều chỉnh kích thước background
         add(bg);
         bg.setLayout(null);
 
@@ -43,25 +43,25 @@ public class DangKyKhach extends JFrame {
         titleLabel.setForeground(Color.WHITE);
         bg.add(titleLabel);
 
-// ==== SĐT ====
+        // ==== SĐT ====
         JLabel sdtLabel = new JLabel("SĐT:");
-        sdtLabel.setBounds(leftX1, baseY+30, 100, labelHeight);
+        sdtLabel.setBounds(leftX1, baseY + 30, 100, labelHeight);
         sdtLabel.setForeground(Color.WHITE);
         bg.add(sdtLabel);
 
         JTextField sdtField = new JTextField();
-        sdtField.setBounds(leftX1, baseY + labelHeight+30, fieldWidth, fieldHeight);
+        sdtField.setBounds(leftX1, baseY + labelHeight + 30, fieldWidth, fieldHeight);
         bg.add(sdtField);
 
         JLabel sdtError = new JLabel("SĐT không hợp lệ");
-        sdtError.setBounds(leftX1, baseY +30+ labelHeight + fieldHeight + 2, fieldWidth, errorSpacing);
+        sdtError.setBounds(leftX1, baseY + 30 + labelHeight + fieldHeight + 2, fieldWidth, errorSpacing);
         sdtError.setForeground(Color.PINK);
         sdtError.setFont(new Font("Arial", Font.ITALIC, 10));
         sdtError.setVisible(false);
         bg.add(sdtError);
 
-// ==== Họ tên ====
-        int nameY = baseY + spacingY + fieldHeight+30;
+        // ==== Họ tên ====
+        int nameY = baseY + spacingY + fieldHeight + 30;
         JLabel nameLabel = new JLabel("Họ Tên:");
         nameLabel.setBounds(leftX1, nameY, 100, labelHeight);
         nameLabel.setForeground(Color.WHITE);
@@ -78,7 +78,7 @@ public class DangKyKhach extends JFrame {
         nameError.setVisible(false);
         bg.add(nameError);
 
-// ==== Email ====
+        // ==== Email ====
         int emailY = nameY + spacingY + fieldHeight;
         JLabel emailLabel = new JLabel("Email:");
         emailLabel.setBounds(leftX1, emailY, 100, labelHeight);
@@ -96,7 +96,25 @@ public class DangKyKhach extends JFrame {
         emailError.setVisible(false);
         bg.add(emailError);
 
-// ==== Tài khoản ====
+        // ==== Địa chỉ ====
+        int addressY = emailY + spacingY + fieldHeight;
+        JLabel addressLabel = new JLabel("Địa chỉ:");
+        addressLabel.setBounds(leftX1, addressY, 100, labelHeight);
+        addressLabel.setForeground(Color.WHITE);
+        bg.add(addressLabel);
+
+        JTextField addressField = new JTextField();
+        addressField.setBounds(leftX1, addressY + labelHeight, fieldWidth * 2 + 25, fieldHeight);
+        bg.add(addressField);
+
+        JLabel addressError = new JLabel("Địa chỉ không hợp lệ");
+        addressError.setBounds(leftX1, addressY + labelHeight + fieldHeight + 2, fieldWidth, errorSpacing);
+        addressError.setForeground(Color.PINK);
+        addressError.setFont(new Font("Arial", Font.ITALIC, 10));
+        addressError.setVisible(false);
+        bg.add(addressError);
+
+        // ==== Tài khoản ====
         JLabel tkLabel = new JLabel("Tài Khoản:");
         tkLabel.setBounds(leftX2, baseY, 100, labelHeight);
         tkLabel.setForeground(Color.WHITE);
@@ -113,7 +131,7 @@ public class DangKyKhach extends JFrame {
         tkError.setVisible(false);
         bg.add(tkError);
 
-// ==== Mật khẩu ====
+        // ==== Mật khẩu ====
         int mkY = baseY + spacingY + fieldHeight;
         JLabel mkLabel = new JLabel("Mật khẩu:");
         mkLabel.setBounds(leftX2, mkY, 100, labelHeight);
@@ -137,7 +155,7 @@ public class DangKyKhach extends JFrame {
         mkError.setVisible(false);
         bg.add(mkError);
 
-// ==== Nhập lại mật khẩu ====
+        // ==== Nhập lại mật khẩu ====
         int mk2Y = mkY + spacingY + fieldHeight;
         JLabel mk2Label = new JLabel("Nhập lại mật khẩu:");
         mk2Label.setBounds(leftX2, mk2Y, 150, labelHeight);
@@ -158,35 +176,35 @@ public class DangKyKhach extends JFrame {
         mk2Field.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    thucHienDangKy(sdtField, nameField, emailField, tkField, mkField, mk2Field,
-                            sdtError, nameError, emailError, tkError, mkError, mk2Error);
+                    thucHienDangKy(sdtField, nameField, emailField, addressField, tkField, mkField, mk2Field,
+                            sdtError, nameError, emailError, addressError, tkError, mkError, mk2Error);
                 }
             }
         });
 
-// ==== Line phân cách ====
+        // ==== Line phân cách ====
         JPanel line = new JPanel();
-        line.setBounds(211, baseY - 10, 1, 350);
+        line.setBounds(211, baseY - 10, 1, 420); // Tăng chiều cao line
         line.setBackground(new Color(160, 100, 255));
         bg.add(line);
 
-// ==== Nút Đăng Ký ====
+        // ==== Nút Đăng Ký ====
         JButton btnDangKy = new JButton("Đăng Ký");
-        btnDangKy.setBounds(125, baseY + 420, 160, 40);
+        btnDangKy.setBounds(125, baseY + 490, 160, 40); // Điều chỉnh vị trí nút đăng ký
         btnDangKy.setBackground(new Color(255, 233, 84));
-        btnDangKy.setForeground(Color.WHITE);
+        btnDangKy.setForeground(Color.BLUE);
         btnDangKy.setFont(new Font("Arial", Font.BOLD, 16));
         bg.add(btnDangKy);
 
-        btnDangKy.addActionListener(e -> thucHienDangKy(sdtField, nameField, emailField, tkField, mkField, mk2Field,
-                sdtError, nameError, emailError, tkError, mkError, mk2Error));
+        btnDangKy.addActionListener(
+                e -> thucHienDangKy(sdtField, nameField, emailField, addressField, tkField, mkField, mk2Field,
+                        sdtError, nameError, emailError, addressError, tkError, mkError, mk2Error));
 
-
-// ==== Link đăng nhập ====
+        // ==== Link đăng nhập ====
         JLabel loginLabel = new JLabel("<html><u>Đăng nhập</u></html>");
-        loginLabel.setBounds(150, baseY + 470, 120, 30);
+        loginLabel.setBounds(150, baseY + 540, 120, 30); // Điều chỉnh vị trí link đăng nhập
         loginLabel.setForeground(new Color(0, 255, 255));
-        loginLabel.setFont(new Font("Arial",Font.BOLD,16));
+        loginLabel.setFont(new Font("Arial", Font.BOLD, 16));
         loginLabel.setHorizontalAlignment(JLabel.CENTER);
         loginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         bg.add(loginLabel);
@@ -206,18 +224,18 @@ public class DangKyKhach extends JFrame {
         });
 
         setVisible(true);
-
     }
 
-    private void thucHienDangKy(JTextField sdt, JTextField ten, JTextField email,
-                                JTextField tk, JPasswordField mk1, JPasswordField mk2,
-                                JLabel sdtError, JLabel tenError, JLabel emailError,
-                                JLabel tkError, JLabel mkError, JLabel mk2Error) {
+    private void thucHienDangKy(JTextField sdt, JTextField ten, JTextField email, JTextField diaChi,
+            JTextField tk, JPasswordField mk1, JPasswordField mk2,
+            JLabel sdtError, JLabel tenError, JLabel emailError, JLabel diaChiError,
+            JLabel tkError, JLabel mkError, JLabel mk2Error) {
         boolean hopLe = true;
 
         sdtError.setVisible(false);
         tenError.setVisible(false);
         emailError.setVisible(false);
+        diaChiError.setVisible(false);
         tkError.setVisible(false);
         mkError.setVisible(false);
         mk2Error.setVisible(false);
@@ -225,6 +243,7 @@ public class DangKyKhach extends JFrame {
         String soDienThoai = sdt.getText().trim();
         String hoTen = ten.getText().trim();
         String emailStr = email.getText().trim();
+        String diaChiStr = diaChi.getText().trim();
         String taiKhoan = tk.getText().trim();
         String matKhau = new String(mk1.getPassword());
         String nhapLai = new String(mk2.getPassword());
@@ -241,6 +260,11 @@ public class DangKyKhach extends JFrame {
 
         if (hoTen.isEmpty()) {
             tenError.setVisible(true);
+            hopLe = false;
+        }
+
+        if (diaChiStr.isEmpty()) {
+            diaChiError.setVisible(true);
             hopLe = false;
         }
 
@@ -267,29 +291,25 @@ public class DangKyKhach extends JFrame {
                     JOptionPane.showMessageDialog(null, "Tài khoản đã tồn tại!");
                 } else {
                     // Thêm vào bảng users
-                    User users = new User(taiKhoan,matKhau,hoTen,"Staff",true);
+                    User users = new User(taiKhoan, matKhau, hoTen, "USER", true);
                     userManager.addUser(users);
 
                     // Thêm vào bảng customers
-                    CustomerManager cus=new CustomerManager();
-                    Customer newcustomer=new Customer(hoTen,soDienThoai,emailStr,"");
+                    CustomerManager cus = new CustomerManager();
+                    Customer newcustomer = new Customer(hoTen, soDienThoai, emailStr, diaChiStr);
                     cus.addCustomer(newcustomer);
 
                     JOptionPane.showMessageDialog(this, "Đăng ký thành công!");
-                   dispose();
-                   new Login().setVisible(true);
+                    dispose();
+                    new Login().setVisible(true);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi kết nối CSDL!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi kết nối CSDL!", "Lỗi",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
-
     }
 
 
-
-    public static void main(String[] args) {
-        new DangKyKhach();
-    }
 }

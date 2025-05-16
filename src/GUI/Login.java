@@ -5,7 +5,10 @@ import DTO.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Objects;
 
 public class Login extends JFrame {
@@ -25,7 +28,8 @@ public class Login extends JFrame {
         userManager = new UserManager();
 
         // Ảnh nền
-        JLabel bg = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/ImageBackground/LoginEdit.png"))));
+        JLabel bg = new JLabel(
+                new ImageIcon(Objects.requireNonNull(getClass().getResource("/ImageBackground/LoginEdit.png"))));
         bg.setBounds(0, 0, 422, 690);
         add(bg);
         bg.setLayout(null);
@@ -74,7 +78,8 @@ public class Login extends JFrame {
         bg.add(lbErrorMessage);
 
         // Logo
-        JLabel logo = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/ImageBackground/Logo-Car2.png"))));
+        JLabel logo = new JLabel(
+                new ImageIcon(Objects.requireNonNull(getClass().getResource("/ImageBackground/Logo-Car2.png"))));
         logo.setBounds(125, 510, 170, 100);
         bg.add(logo);
 

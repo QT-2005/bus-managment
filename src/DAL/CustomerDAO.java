@@ -61,6 +61,27 @@ public class CustomerDAO {
 
         return customers;
     }
+    public Customer getCustomerByName(String name) {
+        Customer customer = null;  // Khởi tạo null, chỉ tạo khi có kết quả
+        String sql = "SELECT * FROM customers WHERE name = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                customer = new Customer();
+                customer.setId(resultSet.getInt("id"));
+                customer.setName(resultSet.getString("name"));
+                customer.setPhone(resultSet.getString("phone"));
+                customer.setEmail(resultSet.getString("email"));
+                customer.setAddress(resultSet.getString("address"));
+                // Set thêm các trường khác nếu có
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customer;
+    }
 
     public Customer getCustomerById(int id) {
         String query = "SELECT * FROM customers WHERE id = ?";
